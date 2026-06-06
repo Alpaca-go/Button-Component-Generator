@@ -62,9 +62,15 @@
     #f8fafc;
 }
 
+.preview-button-shell,
 .preview-button {
   max-width: min(88%, 640px);
   user-select: none;
+}
+
+.preview-button-shell {
+  display: inline-flex;
+  justify-content: center;
 }
 
 .state-strip {

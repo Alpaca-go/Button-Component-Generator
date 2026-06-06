@@ -1,17 +1,18 @@
-import { escapeJsString } from "./codeHelpers";
 import { generateButtonCss } from "./generateButtonCss";
+import { generateReactButtonJsx, getReactDefaultChildren } from "./generateButtonMarkup";
 
 export function generateReactCssCode(config) {
   return `// Button.jsx
 import "./Button.css";
 
-export default function Button({ children = "${escapeJsString(config.text)}", disabled = false, onClick }) {
+export default function Button({
+  children = "${getReactDefaultChildren(config)}",
+  loading = false,
+  disabled = false,
+  onClick
+}) {
   return (
-    <button className="generated-button" disabled={disabled} onClick={onClick}>
-      <span className="generated-button__content">
-        {children}
-      </span>
-    </button>
+    ${generateReactButtonJsx(config)}
   );
 }
 

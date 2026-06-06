@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { generateButtonCss } from "../utils/generateButtonCss";
+import { generateButtonMarkup } from "../utils/generateButtonMarkup";
 
 export default function PreviewPanel({ config }) {
   const [backgroundMode, setBackgroundMode] = useState("dark");
   const generatedCss = generateButtonCss(config);
+  const generatedMarkup = generateButtonMarkup(config);
 
   return (
     <section className="preview-panel">
@@ -33,22 +35,18 @@ export default function PreviewPanel({ config }) {
       </div>
 
       <div className={`preview-stage ${backgroundMode}`}>
-        <button
-          className="generated-button preview-button"
-          disabled={config.interaction.disabledEnabled}
-          type="button"
-        >
-          <span className="generated-button__content">
-            {config.text || "Button"}
-          </span>
-        </button>
+        <div
+          className="preview-button-shell"
+          dangerouslySetInnerHTML={{ __html: generatedMarkup }}
+        />
       </div>
 
       <div className="state-strip">
-        <span>Press: {config.effects.pressEnabled ? "enabled" : "off"}</span>
-        <span>Shine: {config.effects.shineEnabled ? "enabled" : "off"}</span>
-        <span>Gradient: {config.effects.animatedGradientEnabled ? "moving" : "off"}</span>
-        <span>Glow: {config.effects.glowEnabled ? "enabled" : "off"}</span>
+        <span>Press: {config.effects.press.enabled ? "enabled" : "off"}</span>
+        <span>Shine: {config.effects.shine.enabled || config.effects.autoShine.enabled ? "enabled" : "off"}</span>
+        <span>Gradient: {config.effects.gradient.animatedEnabled ? "moving" : "off"}</span>
+        <span>Border: {config.effects.borderFlow.enabled ? "flowing" : "solid"}</span>
+        <span>State: {config.state.loadingPreview ? "loading" : "ready"}</span>
       </div>
     </section>
   );

@@ -1,10 +1,8 @@
-import { escapeHtml } from "./codeHelpers";
 import { generateButtonCss } from "./generateButtonCss";
+import { generateButtonMarkup } from "./generateButtonMarkup";
 
 export function generateHtmlCssCode(config) {
-  return `<button class="generated-button"${config.interaction.disabledEnabled ? " disabled" : ""}>
-  <span class="generated-button__content">${escapeHtml(config.text)}</span>
-</button>
+  return `${generateButtonMarkup(config)}
 
 <style>
 ${generateButtonCss(config)}

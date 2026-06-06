@@ -66,8 +66,8 @@ function legacyFlatToGrouped(config) {
       hoverTextColor: config.hoverTextColor,
     },
     border: {
-      borderWidth: config.borderWidth,
-      borderColor: config.borderColor,
+      width: config.borderWidth,
+      color: config.borderColor,
     },
     shadow: {
       enabled: config.shadowEnabled,
@@ -82,13 +82,80 @@ function legacyFlatToGrouped(config) {
     interaction: {
       transitionDuration: config.transitionDuration,
       hoverScale: config.hoverScale,
+      cursor: config.cursor,
+    },
+    state: {
       disabledEnabled: config.disabledEnabled,
       disabledOpacity: config.disabledOpacity,
-      cursor: config.cursor,
     },
   };
 
   return JSON.parse(JSON.stringify(grouped, (_key, value) => value ?? undefined));
+}
+
+function upgradeGroupedConfig(config) {
+  const upgraded = { ...config };
+
+  if (isPlainObject(config.border)) {
+    upgraded.border = {
+      ...config.border,
+      width: config.border.width ?? config.border.borderWidth,
+      color: config.border.color ?? config.border.borderColor,
+    };
+  }
+
+  if (isPlainObject(config.interaction)) {
+    upgraded.interaction = {
+      ...config.interaction,
+    };
+
+    upgraded.state = {
+      ...config.state,
+      disabledEnabled:
+        config.state?.disabledEnabled ?? config.interaction.disabledEnabled,
+      disabledOpacity:
+        config.state?.disabledOpacity ?? config.interaction.disabledOpacity,
+    };
+  }
+
+  if (isPlainObject(config.effects)) {
+    const effects = config.effects;
+
+    upgraded.effects = {
+      ...effects,
+      press: {
+        ...effects.press,
+        enabled: effects.press?.enabled ?? effects.pressEnabled,
+        depth: effects.press?.depth ?? effects.pressDepth,
+        scale: effects.press?.scale ?? effects.pressScale,
+      },
+      shine: {
+        ...effects.shine,
+        enabled: effects.shine?.enabled ?? effects.shineEnabled,
+        trigger: effects.shine?.trigger ?? effects.shineTrigger,
+        color: effects.shine?.color ?? effects.shineColor,
+        width: effects.shine?.width ?? effects.shineWidth,
+        duration: effects.shine?.duration ?? effects.shineDuration,
+        angle: effects.shine?.angle ?? effects.shineAngle,
+      },
+      gradient: {
+        ...effects.gradient,
+        animatedEnabled:
+          effects.gradient?.animatedEnabled ?? effects.animatedGradientEnabled,
+        colors: effects.gradient?.colors ?? effects.gradientColors,
+        duration: effects.gradient?.duration ?? effects.gradientDuration,
+        direction: effects.gradient?.direction ?? effects.gradientDirection,
+      },
+      glow: {
+        ...effects.glow,
+        enabled: effects.glow?.enabled ?? effects.glowEnabled,
+        color: effects.glow?.color ?? effects.glowColor,
+        blur: effects.glow?.blur ?? effects.glowBlur,
+      },
+    };
+  }
+
+  return upgraded;
 }
 
 export function normalizeButtonConfig(config) {
@@ -97,7 +164,7 @@ export function normalizeButtonConfig(config) {
   }
 
   const maybeGrouped = isPlainObject(config.size)
-    ? config
+    ? upgradeGroupedConfig(config)
     : legacyFlatToGrouped(config);
 
   return mergeConfig(defaultButtonConfig, maybeGrouped);

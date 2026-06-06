@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { copyToClipboard } from "../utils/copyToClipboard";
 import { generateHtmlCssCode } from "../utils/generateHtmlCssCode";
 import { generateReactCssCode } from "../utils/generateReactCssCode";
@@ -11,6 +11,7 @@ const codeTabs = [
 export default function CodePanel({ config }) {
   const [activeTab, setActiveTab] = useState("html");
   const [copyState, setCopyState] = useState("idle");
+  const codeRef = useRef(null);
 
   const code = useMemo(() => {
     return activeTab === "html"
@@ -20,7 +21,15 @@ export default function CodePanel({ config }) {
 
   const handleCopy = async () => {
     const copied = await copyToClipboard(code);
-    setCopyState(copied ? "copied" : "failed");
+    if (!copied && codeRef.current) {
+      const range = document.createRange();
+      const selection = window.getSelection();
+      range.selectNodeContents(codeRef.current);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    setCopyState(copied ? "copied" : "selected");
 
     window.setTimeout(() => {
       setCopyState("idle");
@@ -35,7 +44,11 @@ export default function CodePanel({ config }) {
           <h2>Generated code</h2>
         </div>
         <button className="primary-action" type="button" onClick={handleCopy}>
-          {copyState === "copied" ? "Copied!" : copyState === "failed" ? "Copy failed" : "Copy Code"}
+          {copyState === "copied"
+            ? "Copied!"
+            : copyState === "selected"
+              ? "Code selected"
+              : "Copy Code"}
         </button>
       </div>
 
@@ -53,7 +66,7 @@ export default function CodePanel({ config }) {
       </div>
 
       <pre className="code-output">
-        <code>{code}</code>
+        <code ref={codeRef}>{code}</code>
       </pre>
     </section>
   );

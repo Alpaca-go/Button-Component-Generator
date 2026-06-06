@@ -18,16 +18,15 @@ export const defaultButtonConfig = {
 
   colors: {
     textColor: "#ffffff",
-    backgroundType: "solid",
     backgroundColor: "#7c3aed",
     hoverEnabled: true,
-    hoverBackgroundColor: "#6d28d9",
     hoverTextColor: "#ffffff",
+    hoverBackgroundColor: "#6d28d9",
   },
 
   border: {
-    borderWidth: 1,
-    borderColor: "#8b5cf6",
+    width: 1,
+    color: "#8b5cf6",
   },
 
   shadow: {
@@ -44,30 +43,124 @@ export const defaultButtonConfig = {
   interaction: {
     transitionDuration: 200,
     hoverScale: 1.04,
-    disabledEnabled: false,
-    disabledOpacity: 0.5,
     cursor: "pointer",
   },
 
+  content: {
+    iconEnabled: false,
+    iconText: "->",
+    iconPosition: "right",
+    iconGap: 8,
+    iconSlideEnabled: true,
+    iconSlideDistance: 8,
+
+    textSwapEnabled: false,
+    hoverText: "Let's Go",
+    textSwapAnimation: "slide-up",
+    textSwapDuration: 250,
+  },
+
+  state: {
+    disabledEnabled: false,
+    disabledOpacity: 0.5,
+
+    loadingEnabled: false,
+    loadingPreview: false,
+    loadingType: "spinner",
+    loadingText: "Loading...",
+  },
+
   effects: {
-    pressEnabled: true,
-    pressDepth: 4,
-    pressScale: 0.98,
+    press: {
+      enabled: true,
+      depth: 4,
+      scale: 0.98,
+    },
 
-    shineEnabled: true,
-    shineTrigger: "hover",
-    shineColor: "rgba(255, 255, 255, 0.55)",
-    shineWidth: 60,
-    shineDuration: 650,
-    shineAngle: -20,
+    shine: {
+      enabled: true,
+      trigger: "hover",
+      color: "rgba(255, 255, 255, 0.55)",
+      width: 60,
+      duration: 650,
+      angle: -20,
+    },
 
-    animatedGradientEnabled: false,
-    gradientColors: ["#7c3aed", "#2563eb", "#ec4899", "#7c3aed"],
-    gradientDuration: 4000,
-    gradientDirection: 90,
+    autoShine: {
+      enabled: false,
+      color: "rgba(255, 255, 255, 0.55)",
+      width: 60,
+      duration: 2800,
+      angle: -20,
+      delayRatio: 0.45,
+    },
 
-    glowEnabled: false,
-    glowColor: "rgba(124, 58, 237, 0.45)",
-    glowBlur: 32,
+    gradient: {
+      animatedEnabled: false,
+      colors: ["#7c3aed", "#2563eb", "#ec4899", "#7c3aed"],
+      duration: 4000,
+      direction: 90,
+    },
+
+    borderFlow: {
+      enabled: false,
+      colors: ["#7c3aed", "#06b6d4", "#ec4899", "#7c3aed"],
+      duration: 4000,
+      width: 2,
+      direction: 90,
+    },
+
+    neon: {
+      enabled: false,
+      color: "rgba(124, 58, 237, 0.6)",
+      blur: 32,
+      intensity: 0.6,
+      hoverIntensity: 0.9,
+    },
+
+    glow: {
+      enabled: false,
+      color: "rgba(124, 58, 237, 0.45)",
+      blur: 32,
+    },
+
+    glass: {
+      enabled: false,
+      opacity: 0.12,
+      blur: 16,
+      borderOpacity: 0.22,
+      highlightEnabled: true,
+      highlightOpacity: 0.22,
+    },
+
+    fillHover: {
+      enabled: false,
+      direction: "left",
+      color: "#ffffff",
+      duration: 400,
+      opacity: 1,
+    },
+
+    pulse: {
+      enabled: false,
+      color: "rgba(124, 58, 237, 0.6)",
+      duration: 2400,
+      minBlur: 12,
+      maxBlur: 36,
+    },
+
+    threeD: {
+      enabled: false,
+      depth: 6,
+      bottomColor: "#4c1d95",
+      pressDepth: 6,
+    },
+
+    drawBorder: {
+      enabled: false,
+      color: "#ffffff",
+      duration: 500,
+      width: 1,
+    },
   },
 };

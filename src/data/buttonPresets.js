@@ -1,207 +1,143 @@
 export const buttonPresets = [
   {
-    name: "Purple Glow",
-    description: "Rounded primary action with a soft violet shadow.",
+    name: "AI Gradient",
+    description: "Flowing violet, blue, and pink gradient for AI actions.",
     config: {
-      text: "Get Started",
+      text: "Generate",
       colors: {
+        textColor: "#ffffff",
         backgroundColor: "#7c3aed",
-        textColor: "#ffffff",
         hoverBackgroundColor: "#6d28d9",
-        hoverTextColor: "#ffffff",
       },
       border: {
-        borderColor: "#8b5cf6",
-      },
-      size: {
-        borderRadius: 999,
-      },
-      shadow: {
-        enabled: true,
-        y: 10,
-        blur: 24,
-        color: "rgba(124, 58, 237, 0.35)",
-        hoverY: 14,
-        hoverBlur: 32,
-      },
-      interaction: {
-        hoverScale: 1.04,
-      },
-      effects: {
-        shineEnabled: false,
-      },
-    },
-  },
-  {
-    name: "Minimal Dark",
-    description: "Compact neutral button for dark product surfaces.",
-    config: {
-      text: "Continue",
-      colors: {
-        backgroundColor: "#111827",
-        textColor: "#ffffff",
-        hoverBackgroundColor: "#1f2937",
-        hoverTextColor: "#ffffff",
-      },
-      border: {
-        borderColor: "#374151",
-      },
-      size: {
-        borderRadius: 12,
-      },
-      shadow: {
-        enabled: false,
-      },
-      interaction: {
-        hoverScale: 1.02,
-      },
-      effects: {
-        shineEnabled: false,
-        glowEnabled: false,
-      },
-    },
-  },
-  {
-    name: "Soft Blue",
-    description: "Calm secondary action with a low-contrast blue fill.",
-    config: {
-      text: "Download",
-      colors: {
-        backgroundColor: "#dbeafe",
-        textColor: "#1d4ed8",
-        hoverBackgroundColor: "#bfdbfe",
-        hoverTextColor: "#1e40af",
-      },
-      border: {
-        borderColor: "#bfdbfe",
-      },
-      size: {
-        borderRadius: 16,
-      },
-      shadow: {
-        enabled: true,
-        y: 8,
-        blur: 20,
-        color: "rgba(59, 130, 246, 0.2)",
-        hoverY: 10,
-        hoverBlur: 24,
-      },
-      interaction: {
-        hoverScale: 1.03,
-      },
-      effects: {
-        pressDepth: 2,
-        shineEnabled: false,
-      },
-    },
-  },
-  {
-    name: "Outline Button",
-    description: "Transparent fill with a clear border and crisp hover.",
-    config: {
-      text: "View Details",
-      colors: {
-        backgroundColor: "transparent",
-        textColor: "#e5e7eb",
-        hoverBackgroundColor: "#ffffff",
-        hoverTextColor: "#111827",
-      },
-      border: {
-        borderWidth: 1,
-        borderColor: "#6b7280",
-      },
-      size: {
-        borderRadius: 10,
-      },
-      shadow: {
-        enabled: false,
-      },
-      interaction: {
-        hoverScale: 1.01,
-      },
-      effects: {
-        pressDepth: 2,
-        shineEnabled: false,
-      },
-    },
-  },
-  {
-    name: "Glass Button",
-    description: "Light translucent button for layered dark previews.",
-    config: {
-      text: "Explore",
-      colors: {
-        backgroundColor: "rgba(255, 255, 255, 0.16)",
-        textColor: "#ffffff",
-        hoverBackgroundColor: "rgba(255, 255, 255, 0.24)",
-        hoverTextColor: "#ffffff",
-      },
-      border: {
-        borderColor: "rgba(255, 255, 255, 0.35)",
-      },
-      size: {
-        borderRadius: 18,
+        color: "rgba(255, 255, 255, 0.28)",
       },
       shadow: {
         enabled: true,
         y: 12,
-        blur: 30,
-        color: "rgba(15, 23, 42, 0.28)",
+        blur: 28,
+        color: "rgba(124, 58, 237, 0.34)",
         hoverY: 16,
         hoverBlur: 36,
       },
-      interaction: {
-        hoverScale: 1.03,
-      },
       effects: {
-        shineEnabled: true,
-        shineColor: "rgba(255, 255, 255, 0.42)",
-        glowEnabled: false,
+        gradient: {
+          animatedEnabled: true,
+          colors: ["#7c3aed", "#2563eb", "#ec4899", "#7c3aed"],
+          duration: 4000,
+          direction: 90,
+        },
+        shine: {
+          enabled: true,
+          color: "rgba(255, 255, 255, 0.45)",
+        },
+        glow: {
+          enabled: true,
+          color: "rgba(124, 58, 237, 0.35)",
+          blur: 28,
+        },
       },
     },
   },
   {
-    name: "Neon Button",
-    description: "High-energy cyan accent with a glowing treatment.",
+    name: "Neon Glow",
+    description: "Bright cyan neon treatment for dark product surfaces.",
     config: {
-      text: "Launch",
+      text: "Activate",
       colors: {
-        backgroundColor: "#06b6d4",
-        textColor: "#061016",
-        hoverBackgroundColor: "#22d3ee",
-        hoverTextColor: "#061016",
+        backgroundColor: "#061016",
+        textColor: "#a5f3fc",
+        hoverBackgroundColor: "#083344",
+        hoverTextColor: "#ecfeff",
       },
       border: {
-        borderColor: "#67e8f9",
+        color: "#22d3ee",
       },
-      size: {
-        borderRadius: 999,
+      shadow: {
+        enabled: false,
       },
-      typography: {
-        fontWeight: 800,
+      effects: {
+        neon: {
+          enabled: true,
+          color: "rgba(34, 211, 238, 0.7)",
+          blur: 42,
+          intensity: 0.65,
+          hoverIntensity: 0.95,
+        },
+        shine: {
+          enabled: true,
+          color: "rgba(165, 243, 252, 0.48)",
+        },
+      },
+    },
+  },
+  {
+    name: "Liquid Glass",
+    description: "Translucent glass surface with highlight and blur.",
+    config: {
+      text: "Explore",
+      colors: {
+        textColor: "#ffffff",
+        backgroundColor: "rgba(255, 255, 255, 0.12)",
+        hoverBackgroundColor: "rgba(255, 255, 255, 0.18)",
+      },
+      border: {
+        width: 1,
+        color: "rgba(255, 255, 255, 0.22)",
       },
       shadow: {
         enabled: true,
-        y: 0,
-        blur: 28,
-        color: "rgba(34, 211, 238, 0.45)",
-        hoverY: 0,
-        hoverBlur: 42,
-      },
-      interaction: {
-        hoverScale: 1.05,
+        y: 16,
+        blur: 38,
+        color: "rgba(15, 23, 42, 0.32)",
       },
       effects: {
-        glowEnabled: true,
-        glowColor: "rgba(34, 211, 238, 0.45)",
-        glowBlur: 28,
-        shineEnabled: true,
+        glass: {
+          enabled: true,
+          opacity: 0.12,
+          blur: 18,
+          borderOpacity: 0.24,
+          highlightEnabled: true,
+          highlightOpacity: 0.24,
+        },
+        shine: {
+          enabled: true,
+          color: "rgba(255, 255, 255, 0.38)",
+        },
       },
     },
   },
   {
-    name: "Press Button",
-    description: "Tactile press motion with a short, game-like shadow.",
+    name: "Cyber Border",
+    description: "Animated gradient border with a sci-fi glow.",
+    config: {
+      text: "Connect",
+      colors: {
+        textColor: "#ffffff",
+        backgroundColor: "#0f1020",
+        hoverBackgroundColor: "#111827",
+      },
+      effects: {
+        borderFlow: {
+          enabled: true,
+          colors: ["#7c3aed", "#06b6d4", "#ec4899", "#7c3aed"],
+          duration: 3600,
+          width: 2,
+          direction: 90,
+        },
+        neon: {
+          enabled: true,
+          color: "rgba(6, 182, 212, 0.45)",
+          blur: 28,
+          intensity: 0.5,
+          hoverIntensity: 0.85,
+        },
+      },
+    },
+  },
+  {
+    name: "Game Press",
+    description: "Chunky 3D button with tactile click depth.",
     config: {
       text: "Press Start",
       colors: {
@@ -211,149 +147,260 @@ export const buttonPresets = [
         hoverTextColor: "#211400",
       },
       border: {
-        borderColor: "#fcd34d",
-      },
-      size: {
-        borderRadius: 14,
+        color: "#fcd34d",
       },
       typography: {
         fontWeight: 800,
       },
       shadow: {
         enabled: true,
-        y: 12,
-        blur: 0,
-        color: "rgba(146, 64, 14, 0.55)",
-        hoverY: 14,
-        hoverBlur: 0,
-      },
-      interaction: {
-        hoverScale: 1.02,
+        y: 10,
+        blur: 18,
+        color: "rgba(146, 64, 14, 0.24)",
       },
       effects: {
-        pressEnabled: true,
-        pressDepth: 8,
-        pressScale: 0.97,
-        shineEnabled: false,
-        glowEnabled: false,
+        threeD: {
+          enabled: true,
+          depth: 7,
+          bottomColor: "#92400e",
+          pressDepth: 7,
+        },
+        press: {
+          enabled: true,
+          depth: 7,
+          scale: 0.98,
+        },
+        shine: {
+          enabled: false,
+        },
       },
     },
   },
   {
     name: "Shine Hover",
-    description: "Clean tech button with a fast highlight sweep.",
+    description: "Clean blue CTA with a fast hover sweep.",
     config: {
       text: "Scan Now",
       colors: {
         backgroundColor: "#2563eb",
         textColor: "#ffffff",
         hoverBackgroundColor: "#1d4ed8",
-        hoverTextColor: "#ffffff",
       },
       border: {
-        borderColor: "#60a5fa",
+        color: "#60a5fa",
       },
       shadow: {
         enabled: true,
         y: 10,
         blur: 24,
         color: "rgba(37, 99, 235, 0.32)",
-        hoverY: 12,
-        hoverBlur: 30,
       },
       effects: {
-        pressEnabled: true,
-        pressDepth: 3,
-        pressScale: 0.98,
-        shineEnabled: true,
-        shineColor: "rgba(255, 255, 255, 0.58)",
-        shineWidth: 58,
-        shineDuration: 600,
-        shineAngle: -22,
-        animatedGradientEnabled: false,
-        glowEnabled: false,
+        shine: {
+          enabled: true,
+          color: "rgba(255, 255, 255, 0.58)",
+          width: 58,
+          duration: 600,
+          angle: -22,
+        },
       },
     },
   },
   {
-    name: "AI Gradient",
-    description: "Continuous blue-violet-pink gradient for AI products.",
+    name: "Soft SaaS",
+    description: "Subtle blue button for calm dashboards.",
+    config: {
+      text: "Continue",
+      colors: {
+        backgroundColor: "#dbeafe",
+        textColor: "#1d4ed8",
+        hoverBackgroundColor: "#bfdbfe",
+        hoverTextColor: "#1e40af",
+      },
+      border: {
+        color: "#bfdbfe",
+      },
+      size: {
+        borderRadius: 14,
+      },
+      shadow: {
+        enabled: true,
+        y: 8,
+        blur: 18,
+        color: "rgba(59, 130, 246, 0.18)",
+      },
+      effects: {
+        shine: {
+          enabled: false,
+        },
+      },
+    },
+  },
+  {
+    name: "Dark Minimal",
+    description: "Restrained neutral button with a crisp hover.",
+    config: {
+      text: "Continue",
+      colors: {
+        backgroundColor: "#111827",
+        textColor: "#ffffff",
+        hoverBackgroundColor: "#1f2937",
+      },
+      border: {
+        color: "#374151",
+      },
+      size: {
+        borderRadius: 10,
+      },
+      shadow: {
+        enabled: false,
+      },
+      effects: {
+        shine: {
+          enabled: false,
+        },
+      },
+    },
+  },
+  {
+    name: "Luxury Outline",
+    description: "Minimal outline button with draw-border hover.",
+    config: {
+      text: "View Details",
+      colors: {
+        backgroundColor: "transparent",
+        textColor: "#f8fafc",
+        hoverBackgroundColor: "rgba(255, 255, 255, 0.05)",
+      },
+      border: {
+        width: 1,
+        color: "rgba(255, 255, 255, 0.28)",
+      },
+      shadow: {
+        enabled: false,
+      },
+      effects: {
+        drawBorder: {
+          enabled: true,
+          color: "#f8fafc",
+          duration: 520,
+          width: 1,
+        },
+        shine: {
+          enabled: false,
+        },
+      },
+    },
+  },
+  {
+    name: "Download Slide Icon",
+    description: "Icon slides in on hover for download actions.",
+    config: {
+      text: "Download",
+      colors: {
+        backgroundColor: "#0f766e",
+        textColor: "#ecfeff",
+        hoverBackgroundColor: "#0d9488",
+      },
+      content: {
+        iconEnabled: true,
+        iconText: "v",
+        iconPosition: "right",
+        iconGap: 10,
+        iconSlideEnabled: true,
+        iconSlideDistance: 10,
+      },
+      effects: {
+        shine: {
+          enabled: true,
+          color: "rgba(204, 251, 241, 0.45)",
+        },
+      },
+    },
+  },
+  {
+    name: "Magic Fill",
+    description: "Hover fill animation with text swap for playful CTAs.",
+    config: {
+      text: "Get Started",
+      colors: {
+        backgroundColor: "transparent",
+        textColor: "#ffffff",
+        hoverTextColor: "#111827",
+      },
+      border: {
+        color: "#ffffff",
+      },
+      content: {
+        textSwapEnabled: true,
+        hoverText: "Let's Go",
+        textSwapAnimation: "slide-up",
+      },
+      effects: {
+        fillHover: {
+          enabled: true,
+          direction: "left",
+          color: "#ffffff",
+          duration: 420,
+          opacity: 1,
+        },
+        shine: {
+          enabled: false,
+        },
+      },
+    },
+  },
+  {
+    name: "Pulse CTA",
+    description: "Always-on pulsing glow for high priority actions.",
+    config: {
+      text: "Join Waitlist",
+      colors: {
+        backgroundColor: "#7c3aed",
+        textColor: "#ffffff",
+        hoverBackgroundColor: "#6d28d9",
+      },
+      effects: {
+        pulse: {
+          enabled: true,
+          color: "rgba(124, 58, 237, 0.6)",
+          duration: 2400,
+          minBlur: 14,
+          maxBlur: 42,
+        },
+        autoShine: {
+          enabled: true,
+          color: "rgba(255, 255, 255, 0.48)",
+          duration: 3000,
+        },
+      },
+    },
+  },
+  {
+    name: "Loading Generate",
+    description: "React-ready loading state with spinner support.",
     config: {
       text: "Generate",
       colors: {
+        backgroundColor: "#4f46e5",
         textColor: "#ffffff",
-        backgroundType: "gradient",
-        backgroundColor: "#7c3aed",
-        hoverBackgroundColor: "#6d28d9",
-        hoverTextColor: "#ffffff",
+        hoverBackgroundColor: "#4338ca",
       },
-      border: {
-        borderColor: "rgba(255, 255, 255, 0.26)",
-      },
-      shadow: {
-        enabled: true,
-        y: 12,
-        blur: 28,
-        color: "rgba(124, 58, 237, 0.32)",
-        hoverY: 16,
-        hoverBlur: 36,
+      state: {
+        loadingEnabled: true,
+        loadingPreview: true,
+        loadingType: "spinner",
+        loadingText: "Generating...",
       },
       effects: {
-        animatedGradientEnabled: true,
-        gradientColors: ["#7c3aed", "#2563eb", "#ec4899", "#7c3aed"],
-        gradientDuration: 4000,
-        gradientDirection: 90,
-        shineEnabled: true,
-        shineColor: "rgba(255, 255, 255, 0.45)",
-        shineWidth: 60,
-        shineDuration: 700,
-        shineAngle: -20,
-        pressEnabled: true,
-        pressDepth: 3,
-        pressScale: 0.98,
-        glowEnabled: true,
-        glowColor: "rgba(124, 58, 237, 0.35)",
-        glowBlur: 28,
-      },
-    },
-  },
-  {
-    name: "Neon Glow",
-    description: "Strong glow treatment for gaming and sci-fi actions.",
-    config: {
-      text: "Activate",
-      colors: {
-        backgroundColor: "#111827",
-        textColor: "#a7f3d0",
-        hoverBackgroundColor: "#064e3b",
-        hoverTextColor: "#ecfdf5",
-      },
-      border: {
-        borderColor: "#34d399",
-      },
-      typography: {
-        fontWeight: 800,
-      },
-      shadow: {
-        enabled: true,
-        y: 0,
-        blur: 18,
-        color: "rgba(52, 211, 153, 0.28)",
-        hoverY: 0,
-        hoverBlur: 28,
-      },
-      effects: {
-        pressEnabled: true,
-        pressDepth: 3,
-        pressScale: 0.97,
-        shineEnabled: true,
-        shineColor: "rgba(167, 243, 208, 0.48)",
-        shineWidth: 70,
-        shineDuration: 720,
-        shineAngle: -18,
-        glowEnabled: true,
-        glowColor: "rgba(52, 211, 153, 0.72)",
-        glowBlur: 46,
+        shine: {
+          enabled: false,
+        },
+        glow: {
+          enabled: true,
+          color: "rgba(79, 70, 229, 0.35)",
+          blur: 26,
+        },
       },
     },
   },
