@@ -1,0 +1,67 @@
+.code-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: calc(100vh - 108px);
+  overflow: hidden;
+  padding: 16px;
+}
+
+.code-header {
+  margin-bottom: 14px;
+}
+
+.code-tabs {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.code-tabs button {
+  width: 100%;
+}
+
+.code-output {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 520px;
+  max-height: calc(100vh - 220px);
+  margin: 0;
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: #090a10;
+  padding: 16px;
+  color: #d1d5db;
+  font-size: 12px;
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+.code-output code {
+  font-family:
+    "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  white-space: pre;
+}
+
+@media (max-width: 1180px) {
+  .code-output {
+    min-height: 420px;
+    max-height: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .code-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .primary-action {
+    width: 100%;
+  }
+
+  .code-tabs {
+    grid-auto-flow: row;
+  }
+}
