@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { createButtonStyle } from "../utils/createButtonStyle";
+import { generateButtonCss } from "../utils/generateButtonCss";
 
 export default function PreviewPanel({ config }) {
-  const [isHover, setIsHover] = useState(false);
   const [backgroundMode, setBackgroundMode] = useState("dark");
-  const buttonStyle = createButtonStyle(config, { isHover });
+  const generatedCss = generateButtonCss(config);
 
   return (
     <section className="preview-panel">
+      <style>{generatedCss}</style>
+
       <div className="preview-toolbar">
         <div>
           <p className="eyebrow">Preview</p>
-          <h2>Live button state</h2>
+          <h2>Live motion state</h2>
         </div>
         <div className="segmented-control" role="tablist" aria-label="Preview background">
           <button
@@ -33,23 +34,21 @@ export default function PreviewPanel({ config }) {
 
       <div className={`preview-stage ${backgroundMode}`}>
         <button
-          className="preview-button"
-          style={buttonStyle}
-          disabled={config.disabledEnabled}
-          onMouseEnter={() => setIsHover(true)}
-          onMouseLeave={() => setIsHover(false)}
-          onFocus={() => setIsHover(true)}
-          onBlur={() => setIsHover(false)}
+          className="generated-button preview-button"
+          disabled={config.interaction.disabledEnabled}
           type="button"
         >
-          {config.text || "Button"}
+          <span className="generated-button__content">
+            {config.text || "Button"}
+          </span>
         </button>
       </div>
 
       <div className="state-strip">
-        <span>Hover: {config.hoverEnabled ? "enabled" : "off"}</span>
-        <span>Shadow: {config.shadowEnabled ? "enabled" : "off"}</span>
-        <span>Disabled: {config.disabledEnabled ? "previewing" : "off"}</span>
+        <span>Press: {config.effects.pressEnabled ? "enabled" : "off"}</span>
+        <span>Shine: {config.effects.shineEnabled ? "enabled" : "off"}</span>
+        <span>Gradient: {config.effects.animatedGradientEnabled ? "moving" : "off"}</span>
+        <span>Glow: {config.effects.glowEnabled ? "enabled" : "off"}</span>
       </div>
     </section>
   );

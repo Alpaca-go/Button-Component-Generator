@@ -19,10 +19,15 @@ export default function PresetList({ onApplyPreset }) {
             <span
               className="preset-swatch"
               style={{
-                background: preset.config.backgroundColor,
-                borderColor: preset.config.borderColor,
-                boxShadow: preset.config.shadowEnabled
-                  ? `0 6px 18px ${preset.config.shadowColor}`
+                background:
+                  preset.config.effects?.animatedGradientEnabled
+                    ? `linear-gradient(90deg, ${preset.config.effects.gradientColors.join(", ")})`
+                    : preset.config.colors?.backgroundColor,
+                borderColor: preset.config.border?.borderColor,
+                boxShadow: preset.config.effects?.glowEnabled
+                  ? `0 0 18px ${preset.config.effects.glowColor}`
+                  : preset.config.shadow?.enabled
+                  ? `0 6px 18px ${preset.config.shadow.color}`
                   : "none",
               }}
             />

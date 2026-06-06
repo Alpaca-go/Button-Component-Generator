@@ -5,6 +5,7 @@ import PreviewPanel from "./components/PreviewPanel";
 import CodePanel from "./components/CodePanel";
 import PresetList from "./components/PresetList";
 import { defaultButtonConfig } from "./config/defaultButtonConfig";
+import { mergeConfig, normalizeButtonConfig, setConfigValue } from "./utils/configTransforms";
 import { loadConfig, saveConfig } from "./utils/localStorage";
 import "./styles/global.css";
 import "./styles/layout.css";
@@ -13,27 +14,20 @@ import "./styles/preview-panel.css";
 import "./styles/code-panel.css";
 
 export default function App() {
-  const [buttonConfig, setButtonConfig] = useState(() => ({
-    ...defaultButtonConfig,
-    ...(loadConfig() || {}),
-  }));
+  const [buttonConfig, setButtonConfig] = useState(() =>
+    normalizeButtonConfig(loadConfig())
+  );
 
   useEffect(() => {
     saveConfig(buttonConfig);
   }, [buttonConfig]);
 
   const updateConfig = (key, value) => {
-    setButtonConfig((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    setButtonConfig((prev) => setConfigValue(prev, key, value));
   };
 
   const applyPreset = (presetConfig) => {
-    setButtonConfig({
-      ...defaultButtonConfig,
-      ...presetConfig,
-    });
+    setButtonConfig(mergeConfig(defaultButtonConfig, presetConfig));
   };
 
   const resetConfig = () => {
