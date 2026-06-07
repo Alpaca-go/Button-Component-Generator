@@ -1,5 +1,9 @@
 import { generateButtonCss } from "./generateButtonCss";
-import { generateReactButtonJsx, getReactDefaultChildren } from "./generateButtonMarkup";
+import {
+  generateReactButtonJsx,
+  getReactDefaultChildren,
+  getReactExtraProps,
+} from "./generateButtonMarkup";
 
 export function generateReactCssCode(config) {
   return `// Button.jsx
@@ -9,6 +13,7 @@ export default function Button({
   children = "${getReactDefaultChildren(config)}",
   loading = false,
   disabled = false,
+${getReactExtraProps(config)}
   onClick
 }) {
   return (

@@ -3,7 +3,8 @@ import Header from "./components/Header";
 import ControlPanel from "./components/ControlPanel";
 import PreviewPanel from "./components/PreviewPanel";
 import CodePanel from "./components/CodePanel";
-import PresetList from "./components/PresetList";
+import PresetBrowser from "./components/PresetBrowser";
+import SourcePanel from "./components/SourcePanel";
 import { defaultButtonConfig } from "./config/defaultButtonConfig";
 import { mergeConfig, normalizeButtonConfig, setConfigValue } from "./utils/configTransforms";
 import { loadConfig, saveConfig } from "./utils/localStorage";
@@ -17,6 +18,7 @@ export default function App() {
   const [buttonConfig, setButtonConfig] = useState(() =>
     normalizeButtonConfig(loadConfig())
   );
+  const [selectedSource, setSelectedSource] = useState("");
 
   useEffect(() => {
     saveConfig(buttonConfig);
@@ -40,7 +42,8 @@ export default function App() {
 
       <main className="app-layout">
         <aside className="left-panel" aria-label="Button controls">
-          <PresetList onApplyPreset={applyPreset} />
+          <SourcePanel selectedSource={selectedSource} onSelectSource={setSelectedSource} />
+          <PresetBrowser onApplyPreset={applyPreset} selectedSource={selectedSource} />
           <ControlPanel config={buttonConfig} updateConfig={updateConfig} />
         </aside>
 
