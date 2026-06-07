@@ -636,6 +636,57 @@ export default function ControlPanel({ config, updateConfig, controlProfile, act
           step={0.01}
           onChange={(value) => updateConfig("interaction.hoverScale", value)}
         />
+        <SwitchControl
+          label="Shadow glow"
+          checked={shadow.enabled}
+          onChange={(checked) => updateConfig("shadow.enabled", checked)}
+        />
+        <ColorControl
+          label="Glow color"
+          value={shadow.color}
+          onChange={(value) => updateConfig("shadow.color", value)}
+          disabled={!shadow.enabled}
+        />
+        <RangeControl
+          label="Resting depth"
+          value={shadow.y}
+          min={0}
+          max={48}
+          step={1}
+          unit="px"
+          onChange={(value) => updateConfig("shadow.y", value)}
+          disabled={!shadow.enabled}
+        />
+        <RangeControl
+          label="Resting blur"
+          value={shadow.blur}
+          min={0}
+          max={80}
+          step={1}
+          unit="px"
+          onChange={(value) => updateConfig("shadow.blur", value)}
+          disabled={!shadow.enabled}
+        />
+        <RangeControl
+          label="Hover depth"
+          value={shadow.hoverY}
+          min={0}
+          max={64}
+          step={1}
+          unit="px"
+          onChange={(value) => updateConfig("shadow.hoverY", value)}
+          disabled={!shadow.enabled}
+        />
+        <RangeControl
+          label="Hover glow blur"
+          value={shadow.hoverBlur}
+          min={0}
+          max={96}
+          step={1}
+          unit="px"
+          onChange={(value) => updateConfig("shadow.hoverBlur", value)}
+          disabled={!shadow.enabled}
+        />
         {canShow("shine") && (
           <>
             <SwitchControl
