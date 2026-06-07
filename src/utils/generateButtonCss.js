@@ -40,6 +40,249 @@ function getNeonShadow(config, hover = false) {
   )}%, transparent)`;
 }
 
+function getSparkAuraCss(config) {
+  const sparkAura = config.effects.sparkAura ?? defaultButtonConfig.effects.sparkAura;
+  if (!sparkAura.enabled) {
+    return "";
+  }
+
+  return `
+.generated-button-spark-wrap {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  isolation: isolate;
+  --spark-active: 0;
+  --spark-play-state: paused;
+  --spark-transition: ${config.interaction.transitionDuration}ms;
+  --spark-bg: radial-gradient(
+      40% 50% at center 100%,
+      color-mix(in srgb, ${sparkAura.surfaceGlowColor} calc(var(--spark-active) * 100%), transparent),
+      transparent
+    ),
+    radial-gradient(
+      80% 100% at center 120%,
+      color-mix(in srgb, ${sparkAura.auraColor} calc(var(--spark-active) * 100%), transparent),
+      transparent
+    ),
+    color-mix(in srgb, ${config.colors.backgroundColor} calc(82% - (var(--spark-active) * 30%)), ${sparkAura.auraColor});
+}
+
+.generated-button-spark-wrap:hover,
+.generated-button-spark-wrap:focus-within {
+  --spark-active: 1;
+  --spark-play-state: running;
+}
+
+.generated-button__spark-sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  rotate: 0deg;
+  overflow: hidden;
+  mask: linear-gradient(white, transparent 50%);
+  animation: sparkAuraFlip ${sparkAura.ringSpeed * 2}ms infinite steps(2, end);
+}
+
+.generated-button__spark-sweep::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  aspect-ratio: 1;
+  top: 0;
+  left: 50%;
+  z-index: -1;
+  translate: -50% -15%;
+  transform: rotate(-90deg);
+  opacity: calc(var(--spark-active) + 0.4);
+  background: conic-gradient(from 0deg, transparent 0 340deg, ${sparkAura.ringColor} 360deg);
+  transition: opacity ${config.interaction.transitionDuration}ms ease;
+  animation: sparkAuraRotate ${sparkAura.ringSpeed}ms linear infinite both;
+}
+
+.generated-button__spark-sweep::after {
+  content: "";
+  position: absolute;
+  inset: ${sparkAura.cut}px;
+  border-radius: inherit;
+  background: transparent;
+}
+
+.generated-button__spark-backdrop {
+  position: absolute;
+  inset: ${sparkAura.cut}px;
+  z-index: 1;
+  border-radius: inherit;
+  background: var(--spark-bg);
+  transition: background var(--spark-transition);
+}
+
+.generated-button__sparkle-icon,
+.generated-button__spark-text {
+  position: relative;
+  z-index: 4;
+}
+
+.generated-button__sparkle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: ${sparkAura.iconSize}px;
+  block-size: ${sparkAura.iconSize}px;
+  translate: -20% -4%;
+  transform-origin: center;
+}
+
+.generated-button__sparkle-icon path {
+  fill: ${sparkAura.iconColor};
+  stroke: ${sparkAura.iconColor};
+  stroke-width: 0.4px;
+}
+
+.generated-button__spark-particle-icon path {
+  fill: ${sparkAura.particleColor};
+  stroke: ${sparkAura.particleColor};
+  stroke-width: 0;
+}
+
+.generated-button__sparkle-icon path {
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 6px ${sparkAura.iconGlowColor});
+  animation-duration: ${sparkAura.iconBounceDuration}ms;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  transition: fill ${config.interaction.transitionDuration}ms ease, stroke ${config.interaction.transitionDuration}ms ease;
+}
+
+.generated-button__sparkle-icon path:nth-of-type(1) {
+  animation-name: sparkAuraPathBounceMain;
+  animation-delay: 100ms;
+}
+
+.generated-button__sparkle-icon path:nth-of-type(2) {
+  animation-name: sparkAuraPathBounceSecondary;
+  animation-delay: 200ms;
+}
+
+.generated-button__sparkle-icon path:nth-of-type(3) {
+  animation-name: sparkAuraPathBounceTertiary;
+  animation-delay: 350ms;
+}
+
+.generated-button__spark-text {
+  translate: 2% -6%;
+  letter-spacing: 0.01ch;
+  background: linear-gradient(135deg, ${sparkAura.textGradientStart}, ${sparkAura.textGradientEnd});
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: background ${config.interaction.transitionDuration}ms ease;
+}
+
+.generated-button__spark-particles {
+  position: absolute;
+  width: ${sparkAura.particleSpread}%;
+  aspect-ratio: 1;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  opacity: var(--spark-active);
+  pointer-events: none;
+  transition: opacity ${config.interaction.transitionDuration}ms ease;
+  -webkit-mask: radial-gradient(white, transparent 65%);
+  mask: radial-gradient(white, transparent 65%);
+}
+
+.generated-button__spark-bodydrop {
+  position: absolute;
+  inset: -22%;
+  z-index: -2;
+  border-radius: 999px;
+  background: radial-gradient(circle, color-mix(in srgb, ${sparkAura.auraColor} 72%, transparent), transparent 70%);
+  opacity: calc(var(--spark-active) * 0.4);
+  filter: blur(20px);
+  transition: opacity var(--spark-transition);
+}
+
+.generated-button__spark-particle {
+  position: absolute;
+  top: calc(var(--y) * 1%);
+  left: calc(var(--x) * 1%);
+  width: calc(var(--size) * 1rem);
+  aspect-ratio: 1;
+  opacity: var(--alpha);
+  transform-origin: var(--origin-x) var(--origin-y);
+  animation: sparkAuraFloat calc(var(--duration) * 1s) calc(var(--delay) * -1s) infinite linear;
+  animation-play-state: var(--spark-play-state);
+}
+
+.generated-button__spark-particle:nth-of-type(even) {
+  animation-direction: reverse;
+}
+
+.generated-button__spark-particle-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.generated-button:hover:not(:disabled) .generated-button__sparkle-icon path {
+  animation-play-state: running;
+}
+
+.generated-button:hover:not(:disabled) .generated-button__spark-text {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, ${sparkAura.textGradientStart} calc(70% + (var(--spark-active) * 30%)), white),
+    color-mix(in srgb, ${sparkAura.textGradientEnd} calc(80% + (var(--spark-active) * 20%)), black)
+  );
+}
+
+.generated-button-spark-wrap .generated-button {
+  background: var(--spark-bg);
+  border: 0;
+  box-shadow:
+    0 0 calc(var(--spark-active) * 3em) calc(var(--spark-active) * 1em) color-mix(in srgb, ${sparkAura.auraColor} 78%, transparent),
+    0 0 0 0 color-mix(in srgb, ${sparkAura.auraColor} calc(var(--spark-active) * 100%), transparent) inset,
+    0 -0.05em 0 0 color-mix(in srgb, ${sparkAura.surfaceGlowColor} calc(var(--spark-active) * 100%), transparent) inset;
+  scale: calc(1 + (var(--spark-active) * ${Math.max(config.interaction.hoverScale - 1, 0.1)}));
+  transition:
+    box-shadow var(--spark-transition),
+    scale var(--spark-transition),
+    background var(--spark-transition);
+}
+
+.generated-button-spark-wrap .generated-button:hover:not(:disabled),
+.generated-button-spark-wrap .generated-button:focus-visible:not(:disabled) {
+  background: var(--spark-bg);
+  box-shadow:
+    0 0 calc(var(--spark-active) * 3em) calc(var(--spark-active) * 1em) color-mix(in srgb, ${sparkAura.auraColor} 78%, transparent),
+    0 0 0 0 color-mix(in srgb, ${sparkAura.auraColor} calc(var(--spark-active) * 100%), transparent) inset,
+    0 -0.05em 0 0 color-mix(in srgb, ${sparkAura.surfaceGlowColor} calc(var(--spark-active) * 100%), transparent) inset;
+  transform: none;
+}
+
+.generated-button-spark-wrap .generated-button::before {
+  content: "";
+  position: absolute;
+  inset: -0.2em;
+  z-index: -1;
+  border: 0.25em solid color-mix(in srgb, ${sparkAura.ringColor} 50%, transparent);
+  border-radius: inherit;
+  opacity: var(--spark-active);
+  transition: opacity var(--spark-transition);
+}
+
+.generated-button-spark-wrap .generated-button:active:not(:disabled) {
+  transform: none;
+  scale: 1;
+}
+`;
+}
+
 function getThreeDShadow(config, pressed = false) {
   const { threeD } = config.effects;
   if (!threeD.enabled) {
@@ -52,6 +295,12 @@ function getThreeDShadow(config, pressed = false) {
 
 function getBackground(config) {
   const { colors, effects, animateUi } = config;
+  if (effects.sparkAura.enabled) {
+    return `radial-gradient(circle at 50% 120%, ${effects.sparkAura.auraColor}, transparent 62%),
+      radial-gradient(circle at 14% 18%, ${effects.sparkAura.surfaceGlowColor}, transparent 32%),
+      ${colors.backgroundColor}`;
+  }
+
   if (animateUi.enabled && animateUi.liquid.enabled) {
     return `linear-gradient(${animateUi.liquid.fillColor} 0 0) no-repeat calc(200% - var(--generated-liquid-width, -1%)) 100% / 200% var(--generated-liquid-height, ${animateUi.liquid.fillHeight}px), ${animateUi.liquid.backgroundColor}`;
   }
@@ -253,7 +502,9 @@ function getLoadingCss(config) {
 export function generateButtonCss(config) {
   const { size, typography, colors, border, shadow, interaction, content, state, effects, animateUi } = config;
   const liquidGalaxy = effects.liquidGalaxy ?? defaultButtonConfig.effects.liquidGalaxy;
+  const sparkAura = effects.sparkAura ?? defaultButtonConfig.effects.sparkAura;
   const liquidGalaxyEnabled = liquidGalaxy.enabled;
+  const sparkAuraEnabled = sparkAura.enabled;
   const animateEnabled = animateUi.enabled;
   const animateVariant = getAnimateUiVariant(animateUi.variant);
   const animateSize = getAnimateUiSize(animateUi.size);
@@ -298,7 +549,11 @@ export function generateButtonCss(config) {
     getNeonShadow(config, true)
   );
   const hoverBackgroundLine =
-    colors.hoverEnabled && !effects.gradient.animatedEnabled && !effects.glass.enabled && !liquidGalaxyEnabled
+    colors.hoverEnabled &&
+    !effects.gradient.animatedEnabled &&
+    !effects.glass.enabled &&
+    !liquidGalaxyEnabled &&
+    !sparkAuraEnabled
       ? `  background: ${animateEnabled ? animateVariant.hoverBackground : colors.hoverBackgroundColor};\n`
       : "";
   const animationLine = getButtonAnimations(config);
@@ -306,6 +561,8 @@ export function generateButtonCss(config) {
     ? `rgba(255, 255, 255, ${effects.glass.borderOpacity})`
     : liquidGalaxyEnabled
       ? `rgba(255, 255, 255, ${liquidGalaxy.borderOpacity})`
+      : sparkAuraEnabled
+        ? "rgba(255, 255, 255, 0.14)"
       : animateEnabled
         ? animateVariant.border
         : border.color;
@@ -845,11 +1102,19 @@ ${animationLine}}
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: ${content.iconEnabled ? content.iconGap : 0}px;
+  gap: ${sparkAuraEnabled ? Math.max(content.iconGap, 6) : content.iconEnabled ? content.iconGap : 0}px;
 }
 
 .generated-button:hover:not(:disabled) {
-${hoverBackgroundLine}  color: ${liquidGalaxyEnabled ? liquidGalaxy.textHoverColor : animateEnabled ? animateVariant.hoverText : colors.hoverTextColor};
+${hoverBackgroundLine}  color: ${
+    liquidGalaxyEnabled
+      ? liquidGalaxy.textHoverColor
+      : sparkAuraEnabled
+        ? colors.textColor
+        : animateEnabled
+          ? animateVariant.hoverText
+          : colors.hoverTextColor
+  };
   box-shadow: ${hoverShadow};
   transform: translateY(0) scale(${liquidGalaxyEnabled ? liquidGalaxy.scale : interaction.hoverScale});
 }
@@ -865,7 +1130,7 @@ ${hoverBackgroundLine}  color: ${liquidGalaxyEnabled ? liquidGalaxy.textHoverCol
 }
 ${fillHoverCss}${shineCss}${highlightCss}${iconCss}${textSwapCss}${drawBorderCss}${getLoadingCss(
     config
-  )}${getLiquidGalaxyCss(config)}${liquidCss}${rippleCss}${flipCss}${copyCss}${githubStarsCss}${particlesCss}${themeCss}${gradientKeyframes}${pulseKeyframes}${shineKeyframes}${autoShineKeyframes}${borderFlowKeyframes}${loadingKeyframes}${liquidGalaxyEnabled ? `
+  )}${getLiquidGalaxyCss(config)}${getSparkAuraCss(config)}${liquidCss}${rippleCss}${flipCss}${copyCss}${githubStarsCss}${particlesCss}${themeCss}${gradientKeyframes}${pulseKeyframes}${shineKeyframes}${autoShineKeyframes}${borderFlowKeyframes}${loadingKeyframes}${liquidGalaxyEnabled ? `
 @keyframes liquidGalaxySpin {
   0% {
     transform: rotate(0deg) scale(1.05);
@@ -887,6 +1152,66 @@ ${fillHoverCss}${shineCss}${highlightCss}${iconCss}${textSwapCss}${drawBorderCss
 
   100% {
     transform: rotate(360deg) scale(1);
+  }
+}
+` : ""}${sparkAuraEnabled ? `
+@keyframes sparkAuraRotate {
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes sparkAuraFlip {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes sparkAuraPathBounceMain {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  35% {
+    transform: scale(${sparkAura.iconBounceScaleMain});
+  }
+
+  65% {
+    transform: scale(${sparkAura.iconBounceScaleSecondary});
+  }
+}
+
+@keyframes sparkAuraPathBounceSecondary {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  35% {
+    transform: scale(${sparkAura.iconBounceScaleSecondary});
+  }
+
+  65% {
+    transform: scale(${Math.max(sparkAura.iconBounceScaleSecondary - 0.22, 1.08)});
+  }
+}
+
+@keyframes sparkAuraPathBounceTertiary {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  35% {
+    transform: scale(${sparkAura.iconBounceScaleTertiary});
+  }
+
+  65% {
+    transform: scale(${Math.max(sparkAura.iconBounceScaleTertiary - 0.35, 1.4)});
+  }
+}
+
+@keyframes sparkAuraFloat {
+  to {
+    rotate: 360deg;
   }
 }
 ` : ""}${animateEnabled && animateUi.ripple.enabled ? `

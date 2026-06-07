@@ -113,6 +113,11 @@ const presetMetadata = {
     category: "Liquid Galaxy",
     tags: ["21st-dev", "liquid", "glow", "cta", "animated"],
   },
+  "Spark Aura": {
+    sourceName: "Uiverse",
+    category: "Spark",
+    tags: ["spark", "sparkle", "glow", "hover", "cta"],
+  },
 };
 
 const sourceUrls = {
@@ -128,6 +133,75 @@ const sourceUrls = {
 };
 
 const rawButtonPresets = [
+  {
+    name: "Spark Aura",
+    description: "Dark glowing sparkle button with a rotating energy ring and lively icon bounce.",
+    config: {
+      text: "Spark Now",
+      size: {
+        height: 52,
+        paddingX: 26,
+        borderRadius: 999,
+      },
+      typography: {
+        fontSize: 15,
+        fontWeight: 700,
+      },
+      colors: {
+        backgroundColor: "#151426",
+        textColor: "#ffffff",
+        hoverTextColor: "#ffffff",
+      },
+      border: {
+        width: 1,
+        color: "rgba(255, 255, 255, 0.12)",
+      },
+      shadow: {
+        enabled: false,
+      },
+      interaction: {
+        hoverScale: 1.1,
+      },
+      effects: {
+        press: {
+          enabled: false,
+        },
+        shine: {
+          enabled: false,
+        },
+        glow: {
+          enabled: false,
+        },
+        sparkAura: {
+          enabled: true,
+          surfaceGlowColor: "rgba(244, 114, 182, 0.24)",
+          auraColor: "rgba(129, 140, 248, 0.48)",
+          ringColor: "rgba(255, 255, 255, 0.96)",
+          cut: 3,
+          ringSpeed: 2200,
+          textGradientStart: "#fdf2f8",
+          textGradientEnd: "#c4b5fd",
+          iconColor: "#ffffff",
+          iconGlowColor: "rgba(255, 255, 255, 0.72)",
+          iconSize: 15,
+          iconBounceScaleMain: 0.5,
+          iconBounceScaleSecondary: 1.5,
+          iconBounceScaleTertiary: 2.5,
+          iconBounceDuration: 720,
+          particleEnabled: true,
+          particleColor: "#f5f3ff",
+          particleCount: 18,
+          particleSizeMin: 0.35,
+          particleSizeMax: 0.9,
+          particleOpacityMin: 0.35,
+          particleOpacityMax: 1,
+          particleDurationMin: 6,
+          particleDurationMax: 14,
+          particleSpread: 200,
+        },
+      },
+    },
+  },
   {
     name: "AI Gradient",
     description: "Flowing violet, blue, and pink gradient for AI actions.",

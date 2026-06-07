@@ -66,7 +66,8 @@ export default function ControlPanel({ config, updateConfig, controlProfile, act
     canShow("glow") ||
     canShow("pulse") ||
     canShow("autoShine") ||
-    canShow("liquidGalaxy");
+    canShow("liquidGalaxy") ||
+    canShow("sparkAura");
   const showAnimateControls =
     canShow("animateBase") ||
     canShow("animateCopy") ||
@@ -952,6 +953,211 @@ export default function ControlPanel({ config, updateConfig, controlProfile, act
               value={effects.liquidGalaxy.starText}
               onChange={(value) => updateConfig("effects.liquidGalaxy.starText", value)}
               disabled={!effects.liquidGalaxy.enabled || !effects.liquidGalaxy.starEnabled}
+            />
+          </>
+        )}
+        {canShow("sparkAura") && (
+          <>
+            <SwitchControl
+              label="Spark Aura"
+              checked={effects.sparkAura.enabled}
+              onChange={(checked) => updateConfig("effects.sparkAura.enabled", checked)}
+            />
+            <ColorControl
+              label="Aura color"
+              value={effects.sparkAura.auraColor}
+              onChange={(value) => updateConfig("effects.sparkAura.auraColor", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <ColorControl
+              label="Surface glow"
+              value={effects.sparkAura.surfaceGlowColor}
+              onChange={(value) => updateConfig("effects.sparkAura.surfaceGlowColor", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <ColorControl
+              label="Ring color"
+              value={effects.sparkAura.ringColor}
+              onChange={(value) => updateConfig("effects.sparkAura.ringColor", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <RangeControl
+              label="Surface cut"
+              value={effects.sparkAura.cut}
+              min={1}
+              max={12}
+              step={1}
+              unit="px"
+              onChange={(value) => updateConfig("effects.sparkAura.cut", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <RangeControl
+              label="Ring speed"
+              value={effects.sparkAura.ringSpeed}
+              min={800}
+              max={6000}
+              step={100}
+              unit="ms"
+              onChange={(value) => updateConfig("effects.sparkAura.ringSpeed", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <ColorControl
+              label="Text gradient start"
+              value={effects.sparkAura.textGradientStart}
+              onChange={(value) => updateConfig("effects.sparkAura.textGradientStart", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <ColorControl
+              label="Text gradient end"
+              value={effects.sparkAura.textGradientEnd}
+              onChange={(value) => updateConfig("effects.sparkAura.textGradientEnd", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <ColorControl
+              label="Icon color"
+              value={effects.sparkAura.iconColor}
+              onChange={(value) => updateConfig("effects.sparkAura.iconColor", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <TextControl
+              label="Icon glow"
+              value={effects.sparkAura.iconGlowColor}
+              onChange={(value) => updateConfig("effects.sparkAura.iconGlowColor", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <RangeControl
+              label="Icon size"
+              value={effects.sparkAura.iconSize}
+              min={10}
+              max={28}
+              step={1}
+              unit="px"
+              onChange={(value) => updateConfig("effects.sparkAura.iconSize", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <RangeControl
+              label="Spark scale 1"
+              value={effects.sparkAura.iconBounceScaleMain}
+              min={0.2}
+              max={1.2}
+              step={0.01}
+              onChange={(value) => updateConfig("effects.sparkAura.iconBounceScaleMain", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <RangeControl
+              label="Spark scale 2"
+              value={effects.sparkAura.iconBounceScaleSecondary}
+              min={0.8}
+              max={2.4}
+              step={0.01}
+              onChange={(value) => updateConfig("effects.sparkAura.iconBounceScaleSecondary", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <RangeControl
+              label="Spark scale 3"
+              value={effects.sparkAura.iconBounceScaleTertiary}
+              min={1.2}
+              max={3.4}
+              step={0.01}
+              onChange={(value) => updateConfig("effects.sparkAura.iconBounceScaleTertiary", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <RangeControl
+              label="Bounce speed"
+              value={effects.sparkAura.iconBounceDuration}
+              min={300}
+              max={1800}
+              step={50}
+              unit="ms"
+              onChange={(value) => updateConfig("effects.sparkAura.iconBounceDuration", value)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <SwitchControl
+              label="Particles"
+              checked={effects.sparkAura.particleEnabled}
+              onChange={(checked) => updateConfig("effects.sparkAura.particleEnabled", checked)}
+              disabled={!effects.sparkAura.enabled}
+            />
+            <ColorControl
+              label="Particle color"
+              value={effects.sparkAura.particleColor}
+              onChange={(value) => updateConfig("effects.sparkAura.particleColor", value)}
+              disabled={!effects.sparkAura.enabled || !effects.sparkAura.particleEnabled}
+            />
+            <RangeControl
+              label="Particle count"
+              value={effects.sparkAura.particleCount}
+              min={4}
+              max={28}
+              step={1}
+              onChange={(value) => updateConfig("effects.sparkAura.particleCount", value)}
+              disabled={!effects.sparkAura.enabled || !effects.sparkAura.particleEnabled}
+            />
+            <RangeControl
+              label="Particle spread"
+              value={effects.sparkAura.particleSpread}
+              min={120}
+              max={260}
+              step={5}
+              unit="%"
+              onChange={(value) => updateConfig("effects.sparkAura.particleSpread", value)}
+              disabled={!effects.sparkAura.enabled || !effects.sparkAura.particleEnabled}
+            />
+            <RangeControl
+              label="Size min"
+              value={effects.sparkAura.particleSizeMin}
+              min={0.2}
+              max={1.2}
+              step={0.05}
+              onChange={(value) => updateConfig("effects.sparkAura.particleSizeMin", value)}
+              disabled={!effects.sparkAura.enabled || !effects.sparkAura.particleEnabled}
+            />
+            <RangeControl
+              label="Size max"
+              value={effects.sparkAura.particleSizeMax}
+              min={0.3}
+              max={1.6}
+              step={0.05}
+              onChange={(value) => updateConfig("effects.sparkAura.particleSizeMax", value)}
+              disabled={!effects.sparkAura.enabled || !effects.sparkAura.particleEnabled}
+            />
+            <RangeControl
+              label="Opacity min"
+              value={effects.sparkAura.particleOpacityMin}
+              min={0.1}
+              max={1}
+              step={0.05}
+              onChange={(value) => updateConfig("effects.sparkAura.particleOpacityMin", value)}
+              disabled={!effects.sparkAura.enabled || !effects.sparkAura.particleEnabled}
+            />
+            <RangeControl
+              label="Opacity max"
+              value={effects.sparkAura.particleOpacityMax}
+              min={0.2}
+              max={1}
+              step={0.05}
+              onChange={(value) => updateConfig("effects.sparkAura.particleOpacityMax", value)}
+              disabled={!effects.sparkAura.enabled || !effects.sparkAura.particleEnabled}
+            />
+            <RangeControl
+              label="Speed min"
+              value={effects.sparkAura.particleDurationMin}
+              min={2}
+              max={16}
+              step={0.5}
+              unit="s"
+              onChange={(value) => updateConfig("effects.sparkAura.particleDurationMin", value)}
+              disabled={!effects.sparkAura.enabled || !effects.sparkAura.particleEnabled}
+            />
+            <RangeControl
+              label="Speed max"
+              value={effects.sparkAura.particleDurationMax}
+              min={3}
+              max={20}
+              step={0.5}
+              unit="s"
+              onChange={(value) => updateConfig("effects.sparkAura.particleDurationMax", value)}
+              disabled={!effects.sparkAura.enabled || !effects.sparkAura.particleEnabled}
             />
           </>
         )}

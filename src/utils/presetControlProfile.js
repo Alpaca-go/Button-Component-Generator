@@ -31,6 +31,7 @@ const optionalOffPatch = {
     threeD: { enabled: false },
     drawBorder: { enabled: false },
     liquidGalaxy: { enabled: false },
+    sparkAura: { enabled: false },
   },
 };
 
@@ -74,6 +75,7 @@ export function getPresetControlProfile(preset) {
     pulse: Boolean(hasEnabled(effects.pulse) || tags.has("pulse")),
     autoShine: Boolean(hasEnabled(effects.autoShine)),
     liquidGalaxy: Boolean(hasEnabled(effects.liquidGalaxy) || category === "liquid galaxy"),
+    sparkAura: Boolean(hasEnabled(effects.sparkAura) || tags.has("spark") || tags.has("sparkle")),
     animateBase: isAnimatePreset,
     animateCopy: Boolean(hasEnabled(animateUi.copy) || (isAnimatePreset && tags.has("copy"))),
     animateStars: Boolean(hasEnabled(animateUi.githubStars) || (isAnimatePreset && tags.has("stars"))),
