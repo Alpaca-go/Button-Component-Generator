@@ -126,7 +126,8 @@ export default function PresetBrowser({ onApplyPreset, selectedSource }) {
         )}
       </div>
 
-      <div className="preset-list">
+      <div className="preset-list-scroll" aria-label="Preset results">
+        <div className="preset-list">
         {filteredPresets.map((preset) => (
           <button
             className="preset-item"
@@ -144,7 +145,8 @@ export default function PresetBrowser({ onApplyPreset, selectedSource }) {
               </em>
             </span>
           </button>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

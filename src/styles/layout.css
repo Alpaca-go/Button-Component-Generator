@@ -40,6 +40,11 @@
   gap: 16px;
 }
 
+.left-panel > .panel-block,
+.right-panel > .panel-block {
+  flex: 0 0 auto;
+}
+
 .panel-block,
 .preview-panel,
 .code-panel {

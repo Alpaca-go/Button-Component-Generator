@@ -3,11 +3,12 @@ import Header from "./components/Header";
 import ControlPanel from "./components/ControlPanel";
 import PreviewPanel from "./components/PreviewPanel";
 import CodePanel from "./components/CodePanel";
-import PresetBrowser from "./components/PresetBrowser";
-import SourcePanel from "./components/SourcePanel";
+import StyleSelector from "./components/StyleSelector";
 import { defaultButtonConfig } from "./config/defaultButtonConfig";
+import { buttonPresets } from "./data/buttonPresets";
 import { mergeConfig, normalizeButtonConfig, setConfigValue } from "./utils/configTransforms";
 import { loadConfig, saveConfig } from "./utils/localStorage";
+import { getPresetBasePatch, getPresetControlProfile } from "./utils/presetControlProfile";
 import "./styles/global.css";
 import "./styles/layout.css";
 import "./styles/control-panel.css";
@@ -18,7 +19,13 @@ export default function App() {
   const [buttonConfig, setButtonConfig] = useState(() =>
     normalizeButtonConfig(loadConfig())
   );
-  const [selectedSource, setSelectedSource] = useState("");
+  const [selectedPresetId, setSelectedPresetId] = useState("custom");
+
+  const selectedPreset =
+    selectedPresetId === "custom"
+      ? null
+      : buttonPresets.find((preset) => preset.id === selectedPresetId) || null;
+  const controlProfile = getPresetControlProfile(selectedPreset);
 
   useEffect(() => {
     saveConfig(buttonConfig);
@@ -28,11 +35,24 @@ export default function App() {
     setButtonConfig((prev) => setConfigValue(prev, key, value));
   };
 
-  const applyPreset = (presetConfig) => {
-    setButtonConfig(mergeConfig(defaultButtonConfig, presetConfig));
+  const selectPreset = (presetId) => {
+    setSelectedPresetId(presetId);
+
+    if (presetId === "custom") {
+      return;
+    }
+
+    const preset = buttonPresets.find((item) => item.id === presetId);
+    if (!preset) {
+      return;
+    }
+
+    const cleanBase = mergeConfig(defaultButtonConfig, getPresetBasePatch());
+    setButtonConfig(mergeConfig(cleanBase, preset.config));
   };
 
   const resetConfig = () => {
+    setSelectedPresetId("custom");
     setButtonConfig(defaultButtonConfig);
   };
 
@@ -42,9 +62,18 @@ export default function App() {
 
       <main className="app-layout">
         <aside className="left-panel" aria-label="Button controls">
-          <SourcePanel selectedSource={selectedSource} onSelectSource={setSelectedSource} />
-          <PresetBrowser onApplyPreset={applyPreset} selectedSource={selectedSource} />
-          <ControlPanel config={buttonConfig} updateConfig={updateConfig} />
+          <StyleSelector
+            presets={buttonPresets}
+            selectedPreset={selectedPreset}
+            selectedPresetId={selectedPresetId}
+            onSelectPreset={selectPreset}
+          />
+          <ControlPanel
+            config={buttonConfig}
+            updateConfig={updateConfig}
+            controlProfile={controlProfile}
+            activeStyleName={selectedPreset?.name || "Custom"}
+          />
         </aside>
 
         <section className="center-panel" aria-label="Button preview">
