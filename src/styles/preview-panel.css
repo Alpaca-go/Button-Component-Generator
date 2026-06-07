@@ -1,6 +1,7 @@
 .preview-panel {
   display: grid;
   grid-template-rows: auto minmax(360px, 1fr) auto;
+  width: 100%;
   min-height: calc(100vh - 108px);
   padding: 16px;
 }
@@ -92,6 +93,18 @@
 @media (max-width: 820px) {
   .preview-panel {
     min-height: 460px;
+  }
+}
+
+@media (min-width: 1181px) {
+  .preview-panel {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .preview-stage {
+    min-height: 0;
   }
 }
 

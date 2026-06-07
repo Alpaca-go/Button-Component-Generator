@@ -44,6 +44,18 @@
   white-space: pre;
 }
 
+@media (min-width: 1181px) {
+  .code-panel {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .code-output {
+    min-height: 0;
+    max-height: none;
+  }
+}
+
 @media (max-width: 1180px) {
   .code-output {
     min-height: 420px;

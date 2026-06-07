@@ -68,8 +68,14 @@ export default function ControlPanel({ config, updateConfig }) {
         <h2>Controls</h2>
       </div>
 
-      <div className="control-group">
-        <h3>Content</h3>
+      <div className="control-tier control-tier-basic">
+        <span>Level 1</span>
+        <h3>Basic style</h3>
+        <p>Text, icon, size, typography, solid colors, and simple borders.</p>
+      </div>
+
+      <div className="control-group control-group-content">
+        <h3>Text and icon</h3>
         <TextControl
           label="Button text"
           value={config.text}
@@ -115,8 +121,8 @@ export default function ControlPanel({ config, updateConfig }) {
         />
       </div>
 
-      <div className="control-group">
-        <h3>Basic</h3>
+      <div className="control-group control-group-basic">
+        <h3>Size and typography</h3>
         <SelectControl
           label="Width mode"
           value={size.widthMode}
@@ -190,7 +196,13 @@ export default function ControlPanel({ config, updateConfig }) {
         />
       </div>
 
-      <div className="control-group">
+      <div className="control-tier control-tier-components">
+        <span>Level 4</span>
+        <h3>Advanced component styles</h3>
+        <p>Preset component behaviors such as copy, stars, flip, ripple, particles, and theme toggles.</p>
+      </div>
+
+      <div className="control-group control-group-animate">
         <h3>Animate UI Buttons</h3>
         <SwitchControl
           label="Use Animate UI style"
@@ -376,8 +388,14 @@ export default function ControlPanel({ config, updateConfig }) {
         />
       </div>
 
-      <div className="control-group">
-        <h3>Background</h3>
+      <div className="control-tier control-tier-gradient">
+        <span>Level 2</span>
+        <h3>Gradient and surface</h3>
+        <p>Color fills, animated gradients, glass, glow, and decorative visual layers.</p>
+      </div>
+
+      <div className="control-group control-group-background">
+        <h3>Color and gradient</h3>
         <ColorControl
           label="Text"
           value={colors.textColor}
@@ -452,7 +470,7 @@ export default function ControlPanel({ config, updateConfig }) {
         />
       </div>
 
-      <div className="control-group">
+      <div className="control-group control-group-border">
         <h3>Border</h3>
         <RangeControl
           label="Width"
@@ -506,7 +524,13 @@ export default function ControlPanel({ config, updateConfig }) {
         />
       </div>
 
-      <div className="control-group">
+      <div className="control-tier control-tier-interaction">
+        <span>Level 3</span>
+        <h3>Hover and click</h3>
+        <p>State changes users feel directly: hover color, fill, shine, press depth, and 3D click feedback.</p>
+      </div>
+
+      <div className="control-group control-group-hover">
         <h3>Hover Effects</h3>
         <ColorControl
           label="Hover background"
@@ -551,7 +575,7 @@ export default function ControlPanel({ config, updateConfig }) {
         />
       </div>
 
-      <div className="control-group">
+      <div className="control-group control-group-click">
         <h3>Click Effects</h3>
         <SwitchControl
           label="Press"
@@ -600,8 +624,14 @@ export default function ControlPanel({ config, updateConfig }) {
         />
       </div>
 
-      <div className="control-group">
-        <h3>Motion</h3>
+      <div className="control-tier control-tier-motion">
+        <span>Level 4</span>
+        <h3>Advanced motion</h3>
+        <p>Ambient effects and complex animated looks such as neon, pulse, auto shine, and Liquid Galaxy.</p>
+      </div>
+
+      <div className="control-group control-group-motion">
+        <h3>Glow and complex motion</h3>
         <SwitchControl
           label="Neon glow"
           checked={effects.neon.enabled}
@@ -747,8 +777,8 @@ export default function ControlPanel({ config, updateConfig }) {
         />
       </div>
 
-      <div className="control-group">
-        <h3>State</h3>
+      <div className="control-group control-group-state">
+        <h3>State previews</h3>
         <SwitchControl
           label="Disabled preview"
           checked={state.disabledEnabled}
